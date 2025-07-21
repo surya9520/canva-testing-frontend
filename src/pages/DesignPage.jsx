@@ -57,6 +57,7 @@ const DesignPage = () => {
 
   const handleDimensionClick = async ({ width, height, label }) => {
     setLoadingLabel(label);
+     const newWin = window.open("", "_blank");
 
     try {
       const res = await fetch(`${BASE_URL}/create-design?type=${activeTab}`, {
@@ -69,7 +70,10 @@ const DesignPage = () => {
       const data = await res.json();
       console.log("�� Design created successfully:", data);
       const encodedUrl = encodeURIComponent(data.edit_url);
-      window.open(`${REDIRECT_URL}/canvaDesign/${encodedUrl}`, '_blank');
+         newWin.location.href = `${REDIRECT_URL}/canvaDesign/${encodeURIComponent(
+      data.edit_url
+    )}`;
+      // window.open(`${REDIRECT_URL}/canvaDesign/${encodedUrl}`, '_blank');
       // window.location.href = data.edit_url;
     } catch (error) {
       console.error("❌ Failed to create design:", error);
