@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
+import { BASE_URL } from '../../config';
 
 const Home = () => {
   const [authUrl, setAuthUrl] = useState("");
 
   const connectCanva = async () => {
-  const res = await fetch('http://localhost:4000/auth/canva', {
+  const res = await fetch(`${BASE_URL}/auth/canva`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
