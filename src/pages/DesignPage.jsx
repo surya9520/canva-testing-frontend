@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { BASE_URL, REDIRECT_URL } from "../../config";
+
 
 const DIMENSIONS = {
   image: [
@@ -57,7 +59,7 @@ const DesignPage = () => {
     setLoadingLabel(label);
 
     try {
-      const res = await fetch(`http://localhost:4000/create-design?type=${activeTab}`, {
+      const res = await fetch(`${BASE_URL}/create-design?type=${activeTab}`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json", "authorization": 'Bearer 8820' },
@@ -67,7 +69,7 @@ const DesignPage = () => {
       const data = await res.json();
       console.log("�� Design created successfully:", data);
       const encodedUrl = encodeURIComponent(data.edit_url);
-      window.open(`http://127.0.0.1:5173/canvaDesign/${encodedUrl}`, '_blank');
+      window.open(`${REDIRECT_URL}/canvaDesign/${encodedUrl}`, '_blank');
       // window.location.href = data.edit_url;
     } catch (error) {
       console.error("❌ Failed to create design:", error);
