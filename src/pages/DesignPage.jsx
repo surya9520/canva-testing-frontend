@@ -59,6 +59,11 @@ const DesignPage = () => {
     setLoadingLabel(label);
      const newWin = window.open("", "_blank");
 
+       if (newWin) {
+    newWin.document.write(`<div style="display: flex; align-items: center; justify-content: center; height: 100vh;"><h3>Preparing your Canva design&hellip;</h3></div>`);
+    newWin.document.title = "Loading Canva Design...";
+  }
+
     try {
       const res = await fetch(`${BASE_URL}/create-design?type=${activeTab}`, {
         method: "POST",
@@ -70,7 +75,7 @@ const DesignPage = () => {
       const data = await res.json();
       console.log("�� Design created successfully:", data);
       const encodedUrl = encodeURIComponent(data.edit_url);
-         newWin.location.href = encodedUrl;
+         newWin.location.href = data.edit_url;
       // window.open(`${REDIRECT_URL}/canvaDesign/${encodedUrl}`, '_blank');
       // window.location.href = data.edit_url;
     } catch (error) {
