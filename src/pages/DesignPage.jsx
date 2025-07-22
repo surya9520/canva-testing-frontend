@@ -70,7 +70,7 @@ const DesignPage = () => {
       const data = await res.json();
       console.log("�� Design created successfully:", data);
       const encodedUrl = encodeURIComponent(data.edit_url);
-         newWin.location.href = `${REDIRECT_URL}/canvaDesign/${encodeURIComponent(
+         newWin.location.href = `${encodeURIComponent(
       data.edit_url
     )}`;
       // window.open(`${REDIRECT_URL}/canvaDesign/${encodedUrl}`, '_blank');
